@@ -54,7 +54,7 @@ app.get('/v1', function(req, res) {
 	res.json(objects.v1Root);
 });
 
-app.use('/v1/tournament', tournament);
+app.use('/v1/tournament/', tournament);
 app.use('/v1/match/', match);
 app.use('/v1/user/', user);
 app.use('/v1/team/', team);
