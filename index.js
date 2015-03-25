@@ -23,15 +23,21 @@ along with FTC Scouting Server.  If not, see <http://www.gnu.org/licenses/>.
 
 // index.js - main app file
 
+
+// npm
 var express = require('express');
+
+// static resources
 var objects = require('./resources/objects');
 var strings = require('./resources/strings');
 
+// app resources
 var tournament = require('./routes/tournament.js');
 var match = require('./routes/match.js');
 var user = require('./routes/user.js');
 var team = require('./routes/team.js');
 
+// app globals
 var app = express();
 
 console.log(strings.copyright);
@@ -54,7 +60,7 @@ app.use('/v1/user/', user);
 app.use('/v1/team/', team);
 
 var server = app.listen(process.env.PORT || 8080, function() {
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log('Server listening at http://%s:%s/', host, port);
+	var host = server.address().address;
+	var port = server.address().port;
+	console.log('Server listening at http://%s:%s/', host, port);
 });
