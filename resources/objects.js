@@ -30,15 +30,9 @@ module.exports = {
 		}
 	},
 	v1Root: {
-		meta: {
-			status: 200,
-			msg: 'OK'
-		},
-		response: {
-			match: '/match/',
-			team: '/team/',
-			tournament: '/tournament/',
-			user: '/user/'
-		}
+		match: '/match/',
+		team: '/team/',
+		tournament: '/tournament/',
+		user: '/user/'
 	}
 };
