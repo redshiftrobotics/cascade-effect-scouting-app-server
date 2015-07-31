@@ -23,6 +23,7 @@ along with FTC Scouting Server.  If not, see <http://www.gnu.org/licenses/>.
 
 var express = require('express');
 var router = express.Router();
+var sqlite3 = require('sqlite').verbose();
 
 router.get('/', function(req, res) {
 	res.send('Got a GET request for /tournament/');
