@@ -24,10 +24,76 @@ along with FTC Scouting Server.  If not, see <http://www.gnu.org/licenses/>.
 var express = require('express');
 var router = express.Router();
 
+var concat = require('concat-stream');
+
 var db = require('../lib/sql');
 
 router.get('/', function(req, res) {
 	res.send('Got a GET request for /tournament/');
+});
+
+router.get('/:id', function(req, res) {
+	db.get('SELECT * FROM tournaments WHERE id = ?;', req.params.id, function(err, row) {
+		if (err) {
+			res.writeHead(500);
+			res.end(err.toString(), function() {
+				throw err;
+			});
+		} else if (row === undefined) {
+			res.writeHead(404);
+			res.end();
+		} else {
+			res.writeHead(200);
+			res.write('{"active":');
+			if (row['active'] === 0) {
+				res.write('true');
+			} else {
+				res.write('false');
+			}
+			res.write(',"name":"' + row['name'] + '"}');
+			res.end();
+		}
+	});
+});
+
+router.post('/:id', function(req, res, params) {
+	req.pipe(concat(function(buf) {
+		var data;
+
+		try {
+			data = JSON.parse(buf.toString());
+		} catch (e) {
+			if (e instanceof SyntaxError) {
+				res.writeHead(400);
+				res.end(e.toString());
+			} else {
+				res.writeHead(500);
+				res.end(e.toString(), function() {
+					throw e;
+				});
+			}
+		}
+
+		// sanity checks
+
+		if (!data.name) {
+			res.setHeader('Content-Type', 'text/plain');
+			res.writeHead(400);
+			res.end('Expected a "name" key.');
+		}
+
+		db.run('INSERT INTO tournaments (active, name) VALUES (0, ?);', data.name, function(err) {
+			if (err) {
+				res.writeHead(500);
+				res.end(err.toString(), function() {
+					throw err;
+				});
+			}
+
+			res.writeHead(201);
+			res.end('{"id":' + this.lastID + '}');
+		});
+	}));
 });
 
 module.exports = router;
