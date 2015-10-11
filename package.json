@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/saasrobotics/scouting-app-server",
   "dependencies": {
+    "concat-stream": "^1.5.0",
     "express": "^4.12.2",
     "sqlite3": "^3.0.5"
   }
