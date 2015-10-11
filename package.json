@@ -14,7 +14,7 @@
     "ftc"
   ],
   "author": "Alex Jordan <alex@strugee.net>",
-  "license": "AGPL",
+  "license": "AGPL-3.0+",
   "bugs": {
     "url": "https://github.com/saasrobotics/scouting-app-server/issues"
   },
