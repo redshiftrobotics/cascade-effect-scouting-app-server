@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+var app = require('../app.js');
+var settings = require('../lib/settings.js');
+
+var server = app.listen(settings.port, settings.address, function() {
+	var host = server.address().address;
+	var port = server.address().port;
+	console.log('Server listening at http://%s:%s/', host, port);
+});
