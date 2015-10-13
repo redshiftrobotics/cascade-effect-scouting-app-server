@@ -27,7 +27,6 @@ var express = require('express');
 
 // static resources
 var objects = require('./resources/objects');
-var strings = require('./resources/strings');
 
 // app resources
 var tournament = require('./routes/tournament.js');
@@ -37,8 +36,6 @@ var team = require('./routes/team.js');
 
 // app globals
 var app = express();
-
-console.log(strings.copyright);
 
 // Handle requests to the root
 app.get('/', function(req, res) {

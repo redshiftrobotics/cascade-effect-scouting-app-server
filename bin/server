@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
 var app = require('../app.js');
+var strings = require('../resources/strings.js');
 var settings = require('../lib/settings.js');
+
+console.log(strings.copyright);
 
 var server = app.listen(settings.port, settings.address, function() {
 	var host = server.address().address;
