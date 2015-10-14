@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var app = require('../app.js');
-var strings = require('../resources/strings.js');
+var strings = require('../resources/strings.json');
 var settings = require('../lib/settings.js');
 
 console.log(strings.copyright);
